@@ -87,3 +87,4 @@ $ tree
     ├── 0_8.jpg
     └── 0_9.jpg
 ```
+![](https://github.com/apple635471/image_augment_python/blob/master/data/0_0.jpg)
