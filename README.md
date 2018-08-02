@@ -87,5 +87,4 @@ $ tree
     ├── 0_8.jpg
     └── 0_9.jpg
 ```
-<img src="https://github.com/apple635471/image_augment_python/blob/master/data/0_0.jpg" width="256" height="256">
-![copy_0_0.jpg]()
+<img src="https://github.com/apple635471/image_augment_python/blob/master/data/0_0.jpg" width="256" height="256"><img src="https://github.com/apple635471/image_augment_python/blob/master/copy_data/copy_0_0.jpg" width="256" height="256">
