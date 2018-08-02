@@ -31,6 +31,7 @@ Options:
 * custom
 ```shell
 $ tree
+
 .
 └── data
     ├── 0_0.jpg
@@ -45,7 +46,9 @@ $ tree
     ├── 0_7.jpg
     ├── 0_8.jpg
     └── 0_9.jpg
+
 $ python imageaugment.py -s ./data/ -d ./copy_data/
+
 0_2.jpg has been completed
 0_5.jpg has been completed
 0_1.jpg has been completed
@@ -58,7 +61,9 @@ $ python imageaugment.py -s ./data/ -d ./copy_data/
 0_9.jpg has been completed
 0_6.jpg has been completed
 0_3.jpg has been completed
+
 $ tree
+
 .
 ├── copy_data
 │   ├── copy_0_0.jpg
