@@ -26,7 +26,7 @@ Options:
                         images after processing. default path is
                         "./after_process/".
 ```
-### example:
+### example1:
 * default
 ```shell
 $ python imageaugment.py
@@ -96,3 +96,54 @@ $ tree
     └── 0_9.jpg
 ```
 <img src="https://github.com/apple635471/image_augment_python/blob/master/data/0_0.jpg" width="256" height="256"><img src="https://github.com/apple635471/image_augment_python/blob/master/copy_data/copy_0_0.jpg" width="256" height="256">
+
+### example2
+* 
+```shell
+$ cd image_augment_python/data_2
+$ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; done
+
+/home/username/image_augment_python/data2/data_2
+/home/username/image_augment_python/data2/data_2/data_2a
+/home/username/image_augment_python/data2/data_2/data_2b
+/home/username/image_augment_python/data2/data_2/data_2c
+/home/username/image_augment_python/data2/data_3
+/home/username/image_augment_python/data2/data_3/data_3a
+/home/username/image_augment_python/data2/data_3/data_3b
+/home/username/image_augment_python/data2/data_3/data_3c
+
+$ cd ..
+$ cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR}; done
+
+.
+.
+.
+.
+.
+0_7.jpg has been completed
+0_4.jpg has been completed
+0_9.jpg has been completed
+0_6.jpg has been completed
+0_3.jpg has been completed
+
+$ cd ..
+$ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; done
+
+/home/username/image_augment_python/copy_data2
+/home/username/image_augment_python/copy_data2/data_2
+/home/username/image_augment_python/copy_data2/data_2/data_2a
+/home/username/image_augment_python/copy_data2/data_2/data_2b
+/home/username/image_augment_python/copy_data2/data_2/data_2c
+/home/username/image_augment_python/copy_data2/data_3
+/home/username/image_augment_python/copy_data2/data_3/data_3a
+/home/username/image_augment_python/copy_data2/data_3/data_3b
+/home/username/image_augment_python/copy_data2/data_3/data_3c
+/home/username/image_augment_python/data2/data_2
+/home/username/image_augment_python/data2/data_2/data_2a
+/home/username/image_augment_python/data2/data_2/data_2b
+/home/username/image_augment_python/data2/data_2/data_2c
+/home/username/image_augment_python/data2/data_3
+/home/username/image_augment_python/data2/data_3/data_3a
+/home/username/image_augment_python/data2/data_3/data_3b
+/home/username/image_augment_python/data2/data_3/data_3c
+```
