@@ -28,6 +28,9 @@ Options:
 ```
 ### example:
 * default
+```shell
+$ python imageaugment.py
+```
 * custom
 ```shell
 $ tree
