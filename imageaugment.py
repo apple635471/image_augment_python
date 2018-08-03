@@ -13,10 +13,8 @@ def parse_args():
     parser.add_option("-d", "--dest", dest="destinationpath", default="./after_process/", help='The destination path where you want to store the images after processing. default path is "%default".')
     parser.add_option("-m", "--mode", dest="mode", default="single", help='(single/multiple) This option decide executing one image or multiple images at a time. (Notice!! multiple images must have same size)')
     options, args = parser.parse_args()
-    print(options.sourcepath)
     if ("./" not in options.sourcepath) and ("/" not in options.sourcepath):
         parser.error('-s option must filled in by an acceptable path name. like "./" or "/" ')
-    print(options.mode)
     if ("single" not in options.mode) and ("multiple" not in options.mode):
         parser.error('-m option must filled in by "single" or "multiple" ')
     if len(args) > 0:
