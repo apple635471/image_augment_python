@@ -10,10 +10,13 @@ def parse_args():
     parser = OptionParser(usage='%prog [OPTIONS]')
     parser.add_option("-s", "--source", dest="sourcepath", default="./", help='The source path where your images in, will be processed later. default path is "%default".')
     parser.add_option("-d", "--dest", dest="destinationpath", default="./after_process/", help='The destination path where you want to store the images after processing. default path is "%default".')
+    parser.add_option("-m", "--mode", dest="mode", default="single", help='(single/multiple) This option decide executing one image or multiple images at a time. (Notice!! multiple images must have same size)')
     options, args = parser.parse_args()
     print(options.sourcepath)
     if ('./' and '/') not in options.sourcepath:
-        parser.error('-s options requires a acceptable path name. like "./" or "/" ')
+        parser.error('-s option must filled in by an acceptable path name. like "./" or "/" ')
+    if ("single" and "multiple") not in options.mode:
+        parser.error('-m option must filled in by "single" or "multiple" ')
     if len(args) > 0:
         parser.error('Do not need to type any arguments in this application.')
     
@@ -38,14 +41,15 @@ def main():
         if ".jpg" in img_name:
             image_list.append(img_name)
     ## load single image
-    #for img_name in image_list:        
-    #    image = cv2.imread(options.sourcepath+"/"+img_name, cv2.IMREAD_COLOR)
-    #    image = seq.augment_image(image)  
-    #    cv2.imwrite(options.destinationpath+"/copy_"+img_name, image)
-    #    print(img_name+" has been completed")
+    if options.mode == "single":
+        for img_name in image_list:        
+            image = cv2.imread(options.sourcepath+"/"+img_name, cv2.IMREAD_COLOR)
+            image = seq.augment_image(image)  
+            cv2.imwrite(options.destinationpath+"/copy_"+img_name, image)
+            print(img_name+" has been completed")
    
     ## load multiple image
-    if image_list: 
+    if image_list and options.mode == "multiple": 
         image = cv2.imread(options.sourcepath+"/"+image_list[0], cv2.IMREAD_COLOR)
         image_size = image.shape
         images = np.empty((len(image_list),image_size[0],image_size[1],image_size[2]))
