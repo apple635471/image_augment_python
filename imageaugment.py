@@ -45,14 +45,17 @@ def main():
     #    print(img_name+" has been completed")
    
     ## load multiple image
-    images = np.empty((len(image_list),512,512,3))
-    for i in range(0, len(image_list)):
-        images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
-    print(images.shape)
-    images = seq.augment_images(images)
-    for i in range(0, len(image_list)):
-        cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
-    print("All images under "+options.sourcepath+" have been completed--------------")
+    if image_list: 
+        image = cv2.imread(options.sourcepath+"/"+image_list[0], cv2.IMREAD_COLOR)
+        image_size = image.shape
+        images = np.empty((len(image_list),image_size[0],image_size[1],image_size[2]))
+        for i in range(0, len(image_list)):
+            images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
+        print(images.shape)
+        images = seq.augment_images(images)
+        for i in range(0, len(image_list)):
+            cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
+        print("All images under "+options.sourcepath+" have been completed--------------")
     
 
     
