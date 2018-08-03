@@ -158,14 +158,6 @@ $ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; do
 * imgaug library support multiple images augment
 * (Notice !) each images must have same size (ex: totally 512x512)
 * 
-```python
-    ## load multiple image
-    images = np.empty((len(image_list),512,512,3))
-    for i in range(0, len(image_list)):
-        images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
-    print(images.shape)
-    images = seq.augment_images(images)
-    for i in range(0, len(image_list)):
-        cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
-    print("All images under "+options.sourcepath+" have been completed--------------")
+```shell
+cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python ../imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR} -m multiple; done; cd ..
 ```
