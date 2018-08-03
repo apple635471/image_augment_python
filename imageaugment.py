@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 import sys
 import os
+import augment_method
 
 def parse_args():
     parser = OptionParser(usage='%prog [OPTIONS]')
@@ -23,11 +24,7 @@ def parse_args():
     
     return options
 
-seq = iaa.Sequential([
-    iaa.Crop(px=(0, 16)), # crop images from each side by 0 to 16px (randomly chosen)
-    iaa.Fliplr(0.5), # 0.5 is the probability, horizontally flip 50% of the images
-    iaa.GaussianBlur(sigma=(3.0, 5.0)) # blur images with a sigma of 0 to 3.0
-])
+seq = augment_method.method1() 
 
 def main():
     options = parse_args()
@@ -60,16 +57,6 @@ def main():
         for i in range(0, len(image_list)):
             cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
         print("All images under "+options.sourcepath+" have been completed--------------")
-    
-
-    
-
-#images = np.random.randint(0, 255, (16, 128, 128, 3), dtype=np.uint8)
-#images = cv2.imread('binoculars-cc0.jpeg',cv2.IMREAD_COLOR)
-#cv2.imshow('image', images)
-#images = seq.augment_image(images)
-#cv2.imshow('image2', images)
-#cv2.waitKey(0)
 
 if __name__ == "__main__":
     main()
