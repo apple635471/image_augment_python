@@ -116,7 +116,7 @@ $ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; do
 /home/username/image_augment_python/data2/data_3/data_3c
 
 $ cd ..
-$ cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR}; done
+$ cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python ../imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR}; done
 
 .
 .
