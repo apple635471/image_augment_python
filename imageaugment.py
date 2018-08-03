@@ -11,7 +11,8 @@ def parse_args():
     parser.add_option("-s", "--source", dest="sourcepath", default="./", help='The source path where your images in, will be processed later. default path is "%default".')
     parser.add_option("-d", "--dest", dest="destinationpath", default="./after_process/", help='The destination path where you want to store the images after processing. default path is "%default".')
     options, args = parser.parse_args()
-    if ('./' or '/') not in options.sourcepath:
+    print(options.sourcepath)
+    if ('./' and '/') not in options.sourcepath:
         parser.error('-s options requires a acceptable path name. like "./" or "/" ')
     if len(args) > 0:
         parser.error('Do not need to type any arguments in this application.')
@@ -32,12 +33,27 @@ def main():
     except OSError, e:
         if e.errno != os.errno.EEXIST:
             raise
+    image_list = []
     for img_name in os.listdir(options.sourcepath):
         if ".jpg" in img_name:
-            image = cv2.imread(options.sourcepath+"/"+img_name, cv2.IMREAD_COLOR)
-            image = seq.augment_image(image)  
-            cv2.imwrite(options.destinationpath+"/copy_"+img_name, image)
-            print(img_name+" has been completed")  
+            image_list.append(img_name)
+    ## load single image
+    #for img_name in image_list:        
+    #    image = cv2.imread(options.sourcepath+"/"+img_name, cv2.IMREAD_COLOR)
+    #    image = seq.augment_image(image)  
+    #    cv2.imwrite(options.destinationpath+"/copy_"+img_name, image)
+    #    print(img_name+" has been completed")
+   
+    ## load multiple image
+    images = np.empty((len(image_list),512,512,3))
+    for i in range(0, len(image_list)):
+        images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
+    print(images.shape)
+    images = seq.augment_images(images)
+    for i in range(0, len(image_list)):
+        cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
+    print("All images under "+options.sourcepath+" have been completed--------------")
+    
 
     
 
