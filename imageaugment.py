@@ -13,9 +13,10 @@ def parse_args():
     parser.add_option("-m", "--mode", dest="mode", default="single", help='(single/multiple) This option decide executing one image or multiple images at a time. (Notice!! multiple images must have same size)')
     options, args = parser.parse_args()
     print(options.sourcepath)
-    if ('./' and '/') not in options.sourcepath:
+    if ("./" not in options.sourcepath) and ("/" not in options.sourcepath):
         parser.error('-s option must filled in by an acceptable path name. like "./" or "/" ')
-    if ("single" and "multiple") not in options.mode:
+    print(options.mode)
+    if ("single" not in options.mode) and ("multiple" not in options.mode):
         parser.error('-m option must filled in by "single" or "multiple" ')
     if len(args) > 0:
         parser.error('Do not need to type any arguments in this application.')
@@ -55,7 +56,6 @@ def main():
         images = np.empty((len(image_list),image_size[0],image_size[1],image_size[2]))
         for i in range(0, len(image_list)):
             images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
-        print(images.shape)
         images = seq.augment_images(images)
         for i in range(0, len(image_list)):
             cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
