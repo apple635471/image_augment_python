@@ -25,6 +25,10 @@ Options:
                         The destination path where you want to store the
                         images after processing. default path is
                         "./after_process/".
+  -m MODE, --mode=MODE  (single/multiple) This option decide executing one
+                        image or multiple images at a time. (Notice!! multiple
+                        images must have same size)
+
 ```
 ### example1:
 * default
@@ -116,7 +120,7 @@ $ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; do
 /home/username/image_augment_python/data2/data_3/data_3c
 
 $ cd ..
-$ cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python ../imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR}; done
+$ cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python ../imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR}; done; cd ..
 
 .
 .
@@ -154,14 +158,6 @@ $ DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do echo ${PWD}/${DIR}; do
 * imgaug library support multiple images augment
 * (Notice !) each images must have same size (ex: totally 512x512)
 * 
-```python
-    ## load multiple image
-    images = np.empty((len(image_list),512,512,3))
-    for i in range(0, len(image_list)):
-        images[i] = cv2.imread(options.sourcepath+"/"+image_list[i], cv2.IMREAD_COLOR)
-    print(images.shape)
-    images = seq.augment_images(images)
-    for i in range(0, len(image_list)):
-        cv2.imwrite(options.destinationpath+"/"+image_list[i], images[i])
-    print("All images under "+options.sourcepath+" have been completed--------------")
+```shell
+cd data2; DIRS=`ls -mR * | sed -n 's/://p'`; for DIR in $DIRS; do mkdir -p ../copy_data2/; python ../imageaugment.py -s ${PWD}/${DIR} -d ../copy_data2/${DIR} -m multiple; done; cd ..
 ```
