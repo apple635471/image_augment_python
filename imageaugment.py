@@ -22,7 +22,7 @@ def parse_args():
     
     return options
 
-seq = augment_method.method1() 
+seq = augment_method.method2() 
 
 def main():
     options = parse_args()

@@ -1,3 +1,4 @@
+import imgaug as ia
 from imgaug import augmenters as iaa
 
 def method1():
@@ -8,3 +9,13 @@ def method1():
         iaa.AdditiveGaussianNoise(scale=0.2*255, per_channel=0.5)
     ])
     return seq
+
+def method2(): ##simplex noise alpha
+    ia.seed(1)
+    seq = iaa.Sequential([
+        iaa.SimplexNoiseAlpha(
+            first=iaa.Multiply(iaa.Choice([0.5, 1.5]), per_channel=False)
+        )
+    ])
+    return seq
+
